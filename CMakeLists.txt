@@ -9,4 +9,4 @@ add_executable(MOLR src/main.cpp include/config.h
         src/MultiDimensional.cpp
         include/MultiDimensional.h)
 
-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG")
