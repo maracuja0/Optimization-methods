@@ -1,0 +1,8 @@
+//
+// Created by maracuja on 23.03.2024.
+//
+
+#ifndef MOLR_MULTIDIMENSIONAL_H
+#define MOLR_MULTIDIMENSIONAL_H
+
+#endif //MOLR_MULTIDIMENSIONAL_H
