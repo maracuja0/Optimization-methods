@@ -3,7 +3,7 @@
 #include "../include/OneDimensional.h"
 #include <iomanip>
 
-double f(const double x);
+double f(double x);
 
 void calcPHI(){
     double fi =((1 + pow(5, 0.5)) / 2);
@@ -11,7 +11,7 @@ void calcPHI(){
     std::cout << "PHI: " << std::setprecision(20)<<  fi << ", ONE_OVER_PHI: " << 1 / fi << '\n';
 }
 
-void LR1(){
+void LR1(function_1d f){
     std::cout << "\n---------------\n";
     std::cout << "------LR1------\n";
     std::cout << "---------------\n\n";
@@ -26,14 +26,17 @@ void LR1(){
 }
 
 void LR2(){
-
+    std::cout << "\n---------------\n";
+    std::cout << "------LR1------\n";
+    std::cout << "---------------\n\n";
+    std::cout << "One dimensional search:\n\n";
 }
 
 int main()
 {
     calcPHI();
 
-    LR1();
+    LR1(f);
 
 
     return 0;
@@ -41,5 +44,6 @@ int main()
 
 double f(const double x) {
     return (x - 5) * x;
+//    return (x - 2) * (x - 5);
 }
 

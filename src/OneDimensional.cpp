@@ -31,7 +31,7 @@ namespace oneDimensional{
         std::cout << "\nIterations number : " << cnt << "\n";
         std::cout << "Answer: ";
 #endif
-        return x_c;
+        return (x_0 + x_1) * 0.5;
     }
 
     double golden_ratio(function_1d func, double x_0, double x_1, const int max_iters, const double eps)
@@ -40,22 +40,33 @@ namespace oneDimensional{
 
         if (a > b) std::swap(a, b);
 
-        double x_l = a, x_r = b, dx = 0.0;
+        double x_l, x_r, y_l, y_r, dx = 0.0;
+
+        dx = b-a;
+        x_l = b - dx * ONE_OVER_PHI;
+        x_r = a + dx * ONE_OVER_PHI;
+
+        y_l = func(x_l);
+        y_r = func(x_r);
 
         int cnt = 0;
         while (cnt != max_iters) {
-            if (std::abs(x_r - x_l) < eps) break;
-            cnt++;
+            if (std::abs(x_r - x_l) < 2 * eps) break;
 
-            dx = b - a;
-            x_l = b - dx * ONE_OVER_PHI;
-            x_r = a + dx * ONE_OVER_PHI;
-
-            if (func(x_l) >= func(x_r)){
+            if(y_l >= y_r){
                 a = x_l;
+                x_l = x_r;
+                y_l = y_r;
+                x_r = a + (b -a) * ONE_OVER_PHI;
+                y_r = func(x_r);
             }else{
                 b = x_r;
+                x_r = x_l;
+                y_r = y_l;
+                x_l = b - (b - a) * ONE_OVER_PHI;
+                y_l = func(x_l);
             }
+            cnt++;
         }
 #if _DEBUG
         std::cout << "\nIterations number : " << cnt << "\n";
