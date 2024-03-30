@@ -1,23 +1,74 @@
+//#include <iostream>
+//#include <cmath>
+//#include "OneDimensional.h"
+//#include "MultiDimensional.h"
+//#include <iomanip>
+//
+//double f(double x);
+//
+//void calcPHI(){
+//    double fi =((1 + pow(5, 0.5)) / 2);
+//
+//    std::cout << "PHI: " << std::setprecision(20)<<  fi << ", ONE_OVER_PHI: " << 1 / fi << '\n';
+//}
+//
+//void LR1(function_1d f){
+//    std::cout << "\n---------------\n";
+//    std::cout << "------LR1------\n";
+//    std::cout << "---------------\n\n";
+//    std::cout << "One dimensional search:\n\n";
+//
+//    double x_0 = -2, x_1 = 10;
+//    std::cout << "y = (x - 5) * x\n" << "x_0 = " << x_0 << ", x_1 = " << x_1 << "\n\n";
+//
+//    std::cout << "Bisect: " << oneDimensional::bisect(f, x_0, x_1) << "\n\n";
+//    std::cout << "Golden ratio: " << oneDimensional::golden_ratio(f, x_0, x_1) << "\n\n";
+//    std::cout << "Fibonacci: " << oneDimensional::fibonacci(f, x_0, x_1) << "\n\n";
+//}
+//
+//void LR2(){
+//    std::cout << "\n---------------\n";
+//    std::cout << "------LR2------\n";
+//    std::cout << "---------------\n\n";
+//    std::cout << "Multi dimensional search:\n\n";
+//
+//}
+//
+//int main()
+//{
+//    calcPHI();
+//
+//    LR1(f);
+//
+//
+//    return 0;
+//}
+//
+//double f(const double x) {
+//    return (x - 5) * x;
+////    return (x - 2) * (x - 5);
+//}
+//
+
 #include <iostream>
-#include <cmath>
-#include "../include/OneDimensional.h"
 #include <iomanip>
 
-double f(double x);
+#include "OneDimensional.h"
+#include "MultiDimensional.h"
 
-void calcPHI(){
-    double fi =((1 + pow(5, 0.5)) / 2);
+void calcPHI() {
+    double fi = ((1 + pow(5, 0.5)) / 2);
 
-    std::cout << "PHI: " << std::setprecision(20)<<  fi << ", ONE_OVER_PHI: " << 1 / fi << '\n';
+    std::cout << "PHI: " << std::setprecision(20) << fi << ", ONE_OVER_PHI: " << 1 / fi << '\n';
 }
 
-void LR1(function_1d f){
+void LR1(function_1d f) {
     std::cout << "\n---------------\n";
     std::cout << "------LR1------\n";
     std::cout << "---------------\n\n";
     std::cout << "One dimensional search:\n\n";
 
-    double x_0 = -2, x_1 = 10;
+    double x_0 = -5, x_1 = 125;
     std::cout << "y = (x - 5) * x\n" << "x_0 = " << x_0 << ", x_1 = " << x_1 << "\n\n";
 
     std::cout << "Bisect: " << oneDimensional::bisect(f, x_0, x_1) << "\n\n";
@@ -25,25 +76,44 @@ void LR1(function_1d f){
     std::cout << "Fibonacci: " << oneDimensional::fibonacci(f, x_0, x_1) << "\n\n";
 }
 
-void LR2(){
+void LR2(function_nd f) {
     std::cout << "\n---------------\n";
-    std::cout << "------LR1------\n";
+    std::cout << "------LR2------\n";
     std::cout << "---------------\n\n";
-    std::cout << "One dimensional search:\n\n";
+    std::cout << "Multi dimensional search:\n\n";
+
+    vector_f64 x_0 = { 0,0 };
+    vector_f64 x_1 = { 5,3 };
+
+    std::cout << "x_0: " << x_0 << ", x_1: " << x_1 << "\n";
+
+    std::cout << "Bisect: " << multiDimensional::bisect(f, x_0, x_1) << "\n\n";
+    std::cout << "Golden ration: " << multiDimensional::golden_ratio(f, x_0, x_1) << "\n\n";
+    std::cout << "Fibonacci:" << multiDimensional::fibonacci(f, x_0, x_1) << "\n\n";
+
+    vector_f64 start_x0 = { 0, 0 };
+    std::cout << "Per coord descend: " << multiDimensional::per_coord_descend(f, start_x0) << "\n";
+}
+
+double f_1(const double x) {
+
+    return (x - 5) * x;
+
+}
+
+
+F64 f_n(const vector_f64& args) {
+
+    return(args[0] - 5) * args[0] + (args[1] - 3) * args[1];
 }
 
 int main()
 {
-    calcPHI();
+    //calcPHI();
 
-    LR1(f);
+    LR1(f_1);
 
+    LR2(f_n);
 
     return 0;
 }
-
-double f(const double x) {
-    return (x - 5) * x;
-//    return (x - 2) * (x - 5);
-}
-
