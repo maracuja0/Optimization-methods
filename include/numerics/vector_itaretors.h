@@ -34,7 +34,19 @@ private:
 	I32 m_index;
 	I32 m_step;
 public:
-	indices_iterator(const I32 index, const I32 step)
+    indices_iterator(indices_iterator&& iter)
+    {
+        m_index = std::exchange(iter.m_index, 0);
+        m_step = std::exchange(iter.m_step, 0);
+    }
+
+    indices_iterator(const indices_iterator& iter)
+    {
+        m_index = iter.m_index;  // std::exchange(iter.m_index, 0);
+        m_step = iter.m_step;  //  std::exchange(iter.m_step, 0);
+    }
+
+    indices_iterator(const I32 index, const I32 step)
 	{
 		m_index = index;
 		m_step = step;

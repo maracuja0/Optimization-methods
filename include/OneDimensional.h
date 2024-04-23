@@ -11,19 +11,19 @@
 typedef double (*function_1d)(const double);
 
 namespace oneDimensional {
-    double bisect(function_1d function, double left, double right, const int max_iteration = MAX_ITERS, const double eps = ACCURACY);
+    double bisect(function_1d function, double left, double right, const int max_iterations = MAX_ITERS, const double eps = ACCURACY);
 
-    double golden_ratio(function_1d function, double left, double right, const int max_iteration = MAX_ITERS, const double eps = ACCURACY);
+    double golden_ratio(function_1d function, double left, double right, const int max_iterations = MAX_ITERS, const double eps = ACCURACY);
 
     double fibonacci(function_1d function, double left, double right, const double eps = ACCURACY);
 }
 
-double oneDimensional::bisect(function_1d function, double left, double right, const int max_iteration, const double eps)
+double oneDimensional::bisect(function_1d function, double left, double right, const int max_iterations, const double eps)
 {
     if (left > right) std::swap(left, right);
     F64 x_c = 0.0;
     I32 iteration = 0;
-    for (; iteration != max_iteration; iteration++)
+    for (; iteration != max_iterations; iteration++)
     {
         if (abs(right - left) < 2 * eps)
             break;
@@ -40,7 +40,7 @@ double oneDimensional::bisect(function_1d function, double left, double right, c
     return (right + left) * 0.5;
 }
 
-double oneDimensional::golden_ratio(function_1d function, double left, double right, const int max_iteration, const double eps)
+double oneDimensional::golden_ratio(function_1d function, double left, double right, const int max_iterations, const double eps)
 {
     if (left > right) std::swap(left, right);
     F64 x_l, x_r, f_l, f_r;
@@ -49,7 +49,7 @@ double oneDimensional::golden_ratio(function_1d function, double left, double ri
     x_r = left  + (right - left) * ONE_OVER_PHI;
     f_l = function(x_l);
     f_r = function(x_r);
-    for (; iteration != max_iteration; iteration++)
+    for (; iteration != max_iterations; iteration++)
     {
         if (abs(right - left) < 2 * eps)
             break;
@@ -123,7 +123,7 @@ double oneDimensional::fibonacci(function_1d function, double left, double right
         fib_2 = fib_1;
         fib_1 = fib_t;
 #if _DEBUG
-        std::cout << "\nfibonacchi [a, b] range: " << (right - left) << "\n";
+//        std::cout << "\nfibonacchi [a, b] range: " << (right - left) << "\n";
 #endif
     }
 #if _DEBUG

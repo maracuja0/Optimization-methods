@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 #include "template_vector.h"
 #include "rational.h"
 
@@ -41,13 +42,13 @@ public:
 
 	template<typename T>friend bool operator==(const numeric_vector_<T>& lhs, const numeric_vector_<T>& rhs);
 	template<typename T>friend bool operator!=(const numeric_vector_<T>& lhs, const numeric_vector_<T>& rhs);
-	
+
 	template<typename T>friend bool operator>(const numeric_vector_<T>& lhs, const numeric_vector_<T>& rhs);
 	template<typename T>friend bool operator<(const numeric_vector_<T>& lhs, const numeric_vector_<T>& rhs);
 
 	template<typename T>friend bool operator>=(const numeric_vector_<T>& lhs, const numeric_vector_<T>& rhs);
 	template<typename T>friend bool operator<=(const numeric_vector_<T>& lhs, const numeric_vector_<T>& rhs);
-	
+
 	template<typename T>friend bool operator >(const T& lhs, const numeric_vector_<T>& rhs);
 	template<typename T>friend bool operator <(const T& lhs, const numeric_vector_<T>& rhs);
 
@@ -505,17 +506,17 @@ void numeric_vector_test()
 	std::cout << "2 - rhs        : " << 2.0 - rhs << "\n";
 	std::cout << "2 * rhs        : " << 2.0 * rhs << "\n";
 	std::cout << "2 / rhs        : " << 2.0 / rhs << "\n";
-							     
+
 	std::cout << "rhs + 2        : " << rhs + 2.0 << "\n";
 	std::cout << "rhs - 2        : " << rhs - 2.0 << "\n";
 	std::cout << "rhs * 2        : " << rhs * 2.0 << "\n";
 	std::cout << "rhs / 2        : " << rhs / 2.0 << "\n";
-								 
+
 	std::cout << "lhs += rhs     : " << (lhs += rhs) << "\n";
 	std::cout << "lhs -= rhs     : " << (lhs -= rhs) << "\n";
 	std::cout << "lhs *= rhs     : " << (lhs *= rhs) << "\n";
 	std::cout << "lhs /= rhs     : " << (lhs /= rhs) << "\n";
-								 
+
 	std::cout << "lhs += 2.0     : " << (lhs += 2.0) << "\n";
 	std::cout << "lhs -= 2.0     : " << (lhs -= 2.0) << "\n";
 	std::cout << "lhs *= 2.0     : " << (lhs *= 2.0) << "\n";

@@ -20,7 +20,7 @@ void LR1(function_1d f) {
     std::cout << "y = (x - 5) * x\n" << "x_0 = " << x_0 << ", x_1 = " << x_1 << "\n\n";
 
     std::cout << "Bisect: " << oneDimensional::bisect(f, x_0, x_1) << "\n\n";
-    std::cout << "Golden ratio: " << oneDimensional::golden_ratio(f, x_0, x_1) << "\n\n";
+    std::cout << "Golden ratio: " << oneDimensional::golden_ratio(f, x_0, x_1, MAX_ITERS, ACCURACY * 0.75) << "\n\n";
     std::cout << "Fibonacci: " << oneDimensional::fibonacci(f, x_0, x_1) << "\n\n";
 }
 
@@ -37,10 +37,10 @@ void LR2(function_nd f) {
 
     std::cout << "Bisect: " << multiDimensional::bisect(f, x_0, x_1) << "\n\n";
     std::cout << "Golden ration: " << multiDimensional::golden_ratio(f, x_0, x_1) << "\n\n";
-    std::cout << "Fibonacci:" << multiDimensional::fibonacci(f, x_0, x_1) << "\n\n";
+    std::cout << "Fibonacci:" << multiDimensional::fibonacci(f, x_0, x_1, ACCURACY * 1.5) << "\n\n";
 
     vector_f64 start_x0 = { 0, 0 };
-    std::cout << "Per coord descend: " << multiDimensional::per_coord_descend(f, start_x0) << "\n";
+    std::cout << "Per coord descend: " << multiDimensional::per_coord_descend(f, start_x0, 10) << "\n";
 }
 
 double f_1(const double x) {
