@@ -11,9 +11,9 @@
 typedef double (*function_1d)(const double);
 
 namespace oneDimensional {
-    double bisect(function_1d function, double left, double right, const int max_iterations = MAX_ITERS, const double eps = ACCURACY);
+    double bisect(function_1d function, double left, double right, const int max_iterations = ITERS_MAX, const double eps = ACCURACY);
 
-    double golden_ratio(function_1d function, double left, double right, const int max_iterations = MAX_ITERS, const double eps = ACCURACY);
+    double golden_ratio(function_1d function, double left, double right, const int max_iterations = ITERS_MAX, const double eps = ACCURACY);
 
     double fibonacci(function_1d function, double left, double right, const double eps = ACCURACY);
 }

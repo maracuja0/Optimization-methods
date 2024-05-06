@@ -10,20 +10,24 @@
 #include "numeric_utils.h"
 #include "common.h"
 
-typedef F64(*function_nd)(const vector_f64&);
+typedef F64(*function_nd)(const numerics::vector_f64&);
 
 namespace multiDimensional {
-    vector_f64 bisect(function_nd function, vector_f64 &left, vector_f64 &right, const I32 max_iterations = MAX_ITERS, const F64 eps = ACCURACY);
-    vector_f64 golden_ratio(function_nd function, vector_f64 &left, vector_f64 &right, const I32 max_iterations = MAX_ITERS, const F64 eps = ACCURACY);
-    vector_f64 fibonacci(function_nd function, vector_f64 &left, vector_f64 &right, const F64 eps = ACCURACY);
-    vector_f64 per_coord_descend(function_nd function, vector_f64 &x_start, const I32 max_iterations = MAX_ITERS, const F64 eps = ACCURACY);
+    numerics::vector_f64 bisect               (function_nd function, numerics::vector_f64 &left, numerics::vector_f64 &right, const I32 max_iterations = ITERS_MAX, const F64 eps = ACCURACY);
+    numerics::vector_f64 golden_ratio         (function_nd function, numerics::vector_f64 &left, numerics::vector_f64 &right, const I32 max_iterations = ITERS_MAX, const F64 eps = ACCURACY);
+    numerics::vector_f64 fibonacci            (function_nd function, numerics::vector_f64 &left, numerics::vector_f64 &right, const F64 eps = ACCURACY);
+    numerics::vector_f64 per_coord_descend    (function_nd function, numerics::vector_f64 &x_start, const I32 max_iterations = ITERS_MAX, const F64 eps = ACCURACY);
+
+    numerics::vector_f64 gradient_descend     (function_nd function, const numerics::vector_f64& x_start, const F64 eps = N_DIM_ACCURACY, const I32 max_iters = N_DIM_ITERS_MAX);
+    numerics::vector_f64 conj_gradient_descend(function_nd function, const numerics::vector_f64& x_start, const F64 eps = N_DIM_ACCURACY, const I32 max_iters = N_DIM_ITERS_MAX);
+    numerics::vector_f64 newtone_raphson      (function_nd function, const numerics::vector_f64& x_start, const F64 eps = N_DIM_ACCURACY, const I32 max_iters = N_DIM_ITERS_MAX);
 }
 
 
-vector_f64 multiDimensional::bisect(function_nd function, vector_f64 &left, vector_f64 &right, const I32 max_iterations, const F64 eps) {
+numerics::vector_f64 multiDimensional::bisect(function_nd function, numerics::vector_f64 &left, numerics::vector_f64 &right, const I32 max_iterations, const F64 eps) {
 
-    vector_f64 x_c, dir, lhs(left), rhs(right);
-    dir = vector_f64::direction(lhs, rhs) * eps;
+    numerics::vector_f64 x_c, dir, lhs(left), rhs(right);
+    dir = numerics::vector_f64::direction(lhs, rhs) * eps;
     I32 iteration = 0;
     for (; iteration != max_iterations; iteration++)
     {
@@ -41,9 +45,9 @@ vector_f64 multiDimensional::bisect(function_nd function, vector_f64 &left, vect
     return (lhs + rhs) * 0.5;
 }
 
-vector_f64 multiDimensional::golden_ratio(function_nd function, vector_f64 &left, vector_f64 &right, const I32 max_iterations, const F64 eps) {
-    vector_f64 lhs(left), rhs(right);
-    vector_f64 x_l, x_r;
+numerics::vector_f64 multiDimensional::golden_ratio(function_nd function, numerics::vector_f64 &left, numerics::vector_f64 &right, const I32 max_iterations, const F64 eps) {
+    numerics::vector_f64 lhs(left), rhs(right);
+    numerics::vector_f64 x_l, x_r;
     F64 f_l, f_r;
     I32 iteration = 0;
     x_l = rhs - (rhs - lhs) * ONE_OVER_PHI;
@@ -77,9 +81,9 @@ vector_f64 multiDimensional::golden_ratio(function_nd function, vector_f64 &left
     return (right + left) * 0.5;
 }
 
-vector_f64 multiDimensional::fibonacci(function_nd function, vector_f64 &left, vector_f64 &right, const F64 eps) {
-    vector_f64 x_l, x_r;
-    vector_f64 lhs(left), rhs(right);
+numerics::vector_f64 multiDimensional::fibonacci(function_nd function, numerics::vector_f64 &left, numerics::vector_f64 &right, const F64 eps) {
+    numerics::vector_f64 x_l, x_r;
+    numerics::vector_f64 lhs(left), rhs(right);
     F64 f_l, f_r, value, fib_t{ 0.0 }, fib_1{ 1.0 }, fib_2{ 1.0 };
     I32 iterations{ 0 };
     value = (right - left).magnitude() / eps;
@@ -132,10 +136,10 @@ vector_f64 multiDimensional::fibonacci(function_nd function, vector_f64 &left, v
     return (rhs + lhs) * 0.5;
 }
 
-vector_f64 multiDimensional::per_coord_descend(function_nd function, vector_f64 &x_start, const I32 max_iterations, const F64 eps) {
-    vector_f64 ort(x_start.size());
-    vector_f64 p_cur;
-    vector_f64 p;
+numerics::vector_f64 multiDimensional::per_coord_descend(function_nd function, numerics::vector_f64 &x_start, const I32 max_iterations, const F64 eps) {
+    numerics::vector_f64 ort(x_start.size());
+    numerics::vector_f64 p_cur;
+    numerics::vector_f64 p;
 
     F64 lam = 1.0;
 
@@ -156,6 +160,24 @@ vector_f64 multiDimensional::per_coord_descend(function_nd function, vector_f64 
     }
 
     return p;
+}
+
+numerics::vector_f64
+multiDimensional::gradient_descend(function_nd function, const numerics::vector_f64 &x_start, const F64 eps,
+                                   const I32 max_iters) {
+    return numerics::vector_f64();
+}
+
+numerics::vector_f64
+multiDimensional::conj_gradient_descend(function_nd function, const numerics::vector_f64 &x_start, const F64 eps,
+                                        const I32 max_iters) {
+    return numerics::vector_f64();
+}
+
+numerics::vector_f64
+multiDimensional::newtone_raphson(function_nd function, const numerics::vector_f64 &x_start, const F64 eps,
+                                  const I32 max_iters) {
+    return numerics::vector_f64();
 }
 
 #endif //MOLR_MULTIDIMENSIONAL_H

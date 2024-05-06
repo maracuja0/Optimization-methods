@@ -4,7 +4,7 @@ add_executable(MOLR ${SOURCE_FILES})
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/include/numerics)
+include_directories(${CMAKE_SOURCE_DIR}/include/numerics/linalg)
+include_directories(${CMAKE_SOURCE_DIR}/include/numerics/rational)
 
-#target_include_directories(MOLR PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-#target_include_directories(MOLR PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include/numerics)
 

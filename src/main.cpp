@@ -20,7 +20,7 @@ void LR1(function_1d f) {
     std::cout << "y = (x - 5) * x\n" << "x_0 = " << x_0 << ", x_1 = " << x_1 << "\n\n";
 
     std::cout << "Bisect: " << oneDimensional::bisect(f, x_0, x_1) << "\n\n";
-    std::cout << "Golden ratio: " << oneDimensional::golden_ratio(f, x_0, x_1, MAX_ITERS, ACCURACY * 0.75) << "\n\n";
+    std::cout << "Golden ratio: " << oneDimensional::golden_ratio(f, x_0, x_1, ITERS_MAX, ACCURACY * 0.75) << "\n\n";
     std::cout << "Fibonacci: " << oneDimensional::fibonacci(f, x_0, x_1) << "\n\n";
 }
 
@@ -30,8 +30,8 @@ void LR2(function_nd f) {
     std::cout << "---------------\n\n";
     std::cout << "Multi dimensional search:\n\n";
 
-    vector_f64 x_0 = { 0,0 };
-    vector_f64 x_1 = { 5,3 };
+    numerics::vector_f64 x_0 = { 0,0 };
+    numerics::vector_f64 x_1 = { 5,3 };
 
     std::cout << "x_0: " << x_0 << ", x_1: " << x_1 << "\n";
 
@@ -39,7 +39,7 @@ void LR2(function_nd f) {
     std::cout << "Golden ration: " << multiDimensional::golden_ratio(f, x_0, x_1) << "\n\n";
     std::cout << "Fibonacci:" << multiDimensional::fibonacci(f, x_0, x_1, ACCURACY * 1.5) << "\n\n";
 
-    vector_f64 start_x0 = { 0, 0 };
+    numerics::vector_f64 start_x0 = { 0, 0 };
     std::cout << "Per coord descend: " << multiDimensional::per_coord_descend(f, start_x0, 10) << "\n";
 }
 
@@ -50,7 +50,7 @@ double f_1(const double x) {
 }
 
 
-F64 f_n(const vector_f64& args) {
+F64 f_n(const numerics::vector_f64& args) {
 
     return(args[0] - 5) * args[0] + (args[1] - 3) * args[1];
 }
